@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Professional Sign Up - AVIJET</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; background: linear-gradient(135deg,#0a0e1a 0%,#1a1d29 100%); color:#fff; display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px }
+        .card { background: rgba(15,17,24,0.9); padding:32px; border-radius:12px; width:720px; max-width:95%; box-shadow:0 20px 50px rgba(0,0,0,0.6); border:1px solid rgba(0,255,136,0.08)}
+        h1{margin-bottom:6px;font-size:28px}
+        p.lead{color:#a4a8b5;margin-bottom:20px}
+        .grid{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+        label{display:block;font-size:13px;margin-bottom:6px;color:#cbd1d9}
+        input,select,textarea{width:100%;padding:12px;border-radius:8px;border:1px solid rgba(255,255,255,0.06);background:rgba(10,12,16,0.6);color:#fff}
+        .full{grid-column:1/3}
+        .btn{background:linear-gradient(135deg,#00ff88 0%,#00d4ff 100%);color:#000;padding:12px 18px;border:none;border-radius:8px;font-weight:800;cursor:pointer}
+        .muted{color:#9aa0aa;font-size:13px}
+        .error{background:rgba(255,51,102,0.12);border-left:4px solid #ff3366;color:#ffb0c0;padding:10px;border-radius:6px;display:none;margin-bottom:12px}
+        .success{background:rgba(0,255,136,0.08);border-left:4px solid #00ff88;color:#c8ffdf;padding:10px;border-radius:6px;display:none;margin-bottom:12px}
+        @media (max-width:640px){.grid{grid-template-columns:1fr}.full{grid-column:auto}}
+    </style>
+</head>
+<body>
+    <div class="card">
+        <h1>Professional Sign Up</h1>
+        <p class="lead">Create a professional account to access advanced features and higher limits.</p>
+
+        <div id="message" class="error"></div>
+        <div id="success" class="success"></div>
+
+        <form id="signupForm" onsubmit="handleSignup(event)">
+            <div class="grid">
+                <div>
+                    <label for="fullname">Full Name</label>
+                    <input id="fullname" name="fullname" type="text" placeholder="Jane Doe" required>
+                </div>
+
+                <div>
+                    <label for="title">Title / Profession</label>
+                    <input id="title" name="title" type="text" placeholder="Pilot / Professional Trader" required>
+                </div>
+
+                <div>
+                    <label for="company">Company / Organization</label>
+                    <input id="company" name="company" type="text" placeholder="Avijet Ltd (optional)">
+                </div>
+
+                <div>
+                    <label for="phone">Phone</label>
+                    <input id="phone" name="phone" type="tel" placeholder="+1 555 555 5555">
+                </div>
+
+                <div class="full">
+                    <label for="email">Professional Email</label>
+                    <input id="email" name="email" type="email" placeholder="name@company.com" required>
+                </div>
+
+                <div>
+                    <label for="password">Password</label>
+                    <input id="password" name="password" type="password" placeholder="Create a strong password" required>
+                </div>
+
+                <div>
+                    <label for="confirm">Confirm Password</label>
+                    <input id="confirm" name="confirm" type="password" placeholder="Confirm password" required>
+                </div>
+
+                <div class="full">
+                    <label for="license">Professional License / ID (optional)</label>
+                    <input id="license" name="license" type="text" placeholder="Registration or license number">
+                </div>
+
+                <div class="full">
+                    <label for="bio">Short Bio / Credentials</label>
+                    <textarea id="bio" name="bio" rows="3" placeholder="A short professional summary (optional)"></textarea>
+                </div>
+
+                <div style="display:flex;align-items:center;gap:10px" class="full">
+                    <input id="agree" type="checkbox" required>
+                    <label for="agree" class="muted">I confirm that the information provided is accurate and I agree to the terms.</label>
+                </div>
+
+                <div class="full" style="display:flex;gap:12px;align-items:center;justify-content:space-between">
+                    <div class="muted">Already registered? <a href="avijetlogin.html" style="color:#00ff88">Sign in</a></div>
+                    <button class="btn" type="submit">Create Professional Account</button>
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <script>
+        function showMessage(text) {
+            const m = document.getElementById('message');
+            m.style.display = 'block';
+            m.textContent = text;
+            setTimeout(()=> m.style.display='none',4000);
+        }
+        function showSuccess(text){
+            const s = document.getElementById('success');
+            s.style.display='block';
+            s.textContent=text;
+        }
+
+        function handleSignup(e){
+            e.preventDefault();
+            const fullname = document.getElementById('fullname').value.trim();
+            const title = document.getElementById('title').value.trim();
+            const company = document.getElementById('company').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value;
+            const confirm = document.getElementById('confirm').value;
+            const license = document.getElementById('license').value.trim();
+            const bio = document.getElementById('bio').value.trim();
+            const agree = document.getElementById('agree').checked;
+
+            if(!agree){ showMessage('You must agree to the terms to continue.'); return; }
+            if(password.length < 6){ showMessage('Password must be at least 6 characters.'); return; }
+            if(password !== confirm){ showMessage('Passwords do not match.'); return; }
+            if(!email || !fullname || !title){ showMessage('Please fill required fields.'); return; }
+
+            // Save professional user to localStorage (demo only)
+            const users = JSON.parse(localStorage.getItem('avijet_users') || '[]');
+            if(users.find(u => u.email.toLowerCase() === email.toLowerCase())){
+                showMessage('An account with this email already exists.');
+                return;
+            }
+
+            const user = { fullname, title, company, phone, email, password, license, bio, professional: true, created: new Date().toISOString() };
+            users.push(user);
+            localStorage.setItem('avijet_users', JSON.stringify(users));
+
+            showSuccess('Account created — redirecting to the site...');
+
+            // Auto-login: save current user and redirect to frontend
+            localStorage.setItem('avijet_current_user', JSON.stringify({ email, fullname, professional: true }));
+            setTimeout(()=> { window.location.href = 'frontend.html'; }, 1500);
+        }
+    </script>
+</body>
+</html>

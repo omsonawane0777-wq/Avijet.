@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw Funds - 7RABET</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&family=Poppins:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-blue: #3b82f6;
+            --primary-dark: #1e40af;
+            --success-green: #10b981;
+            --warning-orange: #f59e0b;
+            --danger-red: #ef4444;
+            --dark-bg: #0f172a;
+            --dark-card: #1e293b;
+            --dark-hover: #334155;
+            --border-color: #334155;
+            --text-primary: #f8fafc;
+            --text-secondary: #94a3b8;
+            --text-muted: #64748b;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            color: var(--text-primary);
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        /* Header */
+        .header {
+            background: rgba(30, 41, 59, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid var(--border-color);
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);
+        }
+
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo-section {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .logo {
+            height: 45px;
+            width: auto;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .page-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .back-btn {
+            background: var(--dark-hover);
+            border: 1px solid var(--border-color);
+            padding: 0.625rem 1.25rem;
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.875rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            text-decoration: none;
+        }
+
+        .back-btn:hover {
+            background: var(--primary-blue);
+            border-color: var(--primary-blue);
+            transform: translateX(-3px);
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1000px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+
+        /* Withdrawal Card */
+        .withdrawal-card {
+            background: var(--dark-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.3);
+        }
+
+        .card-header {
+            text-align: center;
+            margin-bottom: 2.5rem;
+            padding-bottom: 2rem;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        .card-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .card-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .card-subtitle {
+            color: var(--text-secondary);
+            font-size: 1rem;
+        }
+
+        /* Balance Section */
+        .balance-section {
+            background: linear-gradient(135deg, rgba(59, 130, 246, 0.1), rgba(30, 64, 175, 0.1));
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+            text-align: center;
+        }
+
+        .balance-label {
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+
+        .balance-amount {
+            font-family: 'Poppins', sans-serif;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--primary-blue);
+        }
+
+        /* Section Title */
+        .section-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 1.25rem;
+        }
+
+        /* Payment Methods Grid */
+        .payment-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .payment-option {
+            background: var(--dark-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.25rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .payment-option:hover {
+            border-color: var(--primary-blue);
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(59, 130, 246, 0.2);
+        }
+
+        .payment-option.active {
+            border-color: var(--success-green);
+            background: rgba(16, 185, 129, 0.1);
+            box-shadow: 0 10px 20px rgba(16, 185, 129, 0.2);
+        }
+
+        .payment-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .payment-name {
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.25rem;
+            font-size: 0.9375rem;
+        }
+
+        .payment-tag {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Form */
+        .form-section {
+            margin-top: 2rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .form-label .required {
+            color: var(--danger-red);
+            margin-left: 0.25rem;
+        }
+
+        .form-input, .form-select {
+            width: 100%;
+            padding: 0.875rem 1rem;
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-primary);
+            font-size: 0.9375rem;
+            transition: all 0.3s ease;
+            font-family: 'Inter', sans-serif;
+        }
+
+        .form-input:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--primary-blue);
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+        }
+
+        .form-input::placeholder {
+            color: var(--text-muted);
+        }
+
+        .form-input.crypto-address {
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+        }
+
+        /* Info & Warning Boxes */
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-left: 4px solid var(--primary-blue);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .info-box strong {
+            color: var(--text-primary);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .warning-box {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-left: 4px solid var(--danger-red);
+            border-radius: 8px;
+            padding: 1rem 1.25rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            line-height: 1.6;
+            color: var(--text-secondary);
+        }
+
+        .warning-box strong {
+            color: var(--danger-red);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-dark));
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(59, 130, 246, 0.3);
+        }
+
+        .submit-btn:hover:not(:disabled) {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary-blue));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(59, 130, 246, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: var(--dark-hover);
+            color: var(--text-muted);
+            cursor: not-allowed;
+            box-shadow: none;
+        }
+
+        /* Modal */
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            display: none;
+            justify-content: center;
+            align-items: center;
+            z-index: 10000;
+            backdrop-filter: blur(8px);
+        }
+
+        .modal.show {
+            display: flex;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content {
+            background: var(--dark-card);
+            border: 1px solid var(--border-color);
+            border-radius: 16px;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 90%;
+            text-align: center;
+            animation: slideUp 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-icon {
+            font-size: 5rem;
+            margin-bottom: 1.5rem;
+            animation: successBounce 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        @keyframes successBounce {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .success-title {
+            font-family: 'Poppins', sans-serif;
+            font-size: 1.875rem;
+            font-weight: 700;
+            color: var(--success-green);
+            margin-bottom: 1rem;
+        }
+
+        .success-message {
+            font-size: 1rem;
+            color: var(--text-secondary);
+            line-height: 1.6;
+            margin-bottom: 2rem;
+        }
+
+        .success-details {
+            background: var(--dark-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 1.5rem;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            border-bottom: 1px solid var(--border-color);
+            font-size: 0.9375rem;
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--text-secondary);
+            font-weight: 500;
+        }
+
+        .detail-value {
+            color: var(--text-primary);
+            font-weight: 600;
+            max-width: 60%;
+            word-break: break-all;
+            text-align: right;
+        }
+
+        .detail-value.highlight {
+            color: var(--success-green);
+        }
+
+        .time-info {
+            background: rgba(245, 158, 11, 0.1);
+            border: 1px solid rgba(245, 158, 11, 0.3);
+            border-radius: 8px;
+            padding: 1rem;
+            margin-bottom: 1.5rem;
+            font-size: 0.875rem;
+            line-height: 1.6;
+        }
+
+        .time-info strong {
+            color: var(--warning-orange);
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .close-btn {
+            width: 100%;
+            padding: 0.875rem;
+            background: linear-gradient(135deg, var(--success-green), #059669);
+            border: none;
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 6px -1px rgba(16, 185, 129, 0.3);
+        }
+
+        .close-btn:hover {
+            background: linear-gradient(135deg, #059669, var(--success-green));
+            transform: translateY(-2px);
+            box-shadow: 0 10px 15px -3px rgba(16, 185, 129, 0.4);
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header {
+                padding: 1rem;
+            }
+
+            .logo {
+                height: 35px;
+            }
+
+            .page-title {
+                font-size: 1rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+                margin: 1.5rem auto;
+            }
+
+            .withdrawal-card {
+                padding: 1.5rem;
+            }
+
+            .card-title {
+                font-size: 1.5rem;
+            }
+
+            .balance-amount {
+                font-size: 2rem;
+            }
+
+            .payment-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .modal-content {
+                padding: 2rem;
+            }
+
+            .success-icon {
+                font-size: 4rem;
+            }
+
+            .success-title {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-title {
+                display: none;
+            }
+
+            .back-btn {
+                padding: 0.5rem 1rem;
+                font-size: 0.8125rem;
+            }
+
+            .payment-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <div class="header">
+        <div class="header-content">
+            <div class="logo-section">
+                <img src="https://nyc3.digitaloceanspaces.com/bhindi-drive/files/b5bcf18e-cb90-4d84-8bf9-648b75b0e2a6/2026-01-17T14-05-59-068Z-d70c5950-chat-image-1768658759048-0.jpg" alt="7RABET Logo" class="logo">
+                <div class="page-title">
+                    <span>💰</span>
+                    <span>Withdraw Funds</span>
+                </div>
+            </div>
+            <a href="game.html" class="back-btn">
+                <span>←</span>
+                <span>Back to Game</span>
+            </a>
+        </div>
+    </div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <div class="withdrawal-card">
+            <div class="card-header">
+                <div class="card-icon">💰</div>
+                <h1 class="card-title">Withdraw Your Winnings</h1>
+                <p class="card-subtitle">Fast & Secure Multi-Payment Withdrawal</p>
+            </div>
+
+            <!-- Balance Section -->
+            <div class="balance-section">
+                <div class="balance-label">Available Balance</div>
+                <div class="balance-amount">₹<span id="userBalance">0.00</span></div>
+            </div>
+
+            <!-- Payment Method Selection -->
+            <div class="payment-methods">
+                <h3 class="section-title">Select Payment Method</h3>
+                <div class="payment-grid">
+                    <div class="payment-option" data-method="btc">
+                        <div class="payment-icon">₿</div>
+                        <div class="payment-name">Bitcoin</div>
+                        <div class="payment-tag">BTC</div>
+                    </div>
+                    <div class="payment-option" data-method="eth">
+                        <div class="payment-icon">Ξ</div>
+                        <div class="payment-name">Ethereum</div>
+                        <div class="payment-tag">ETH</div>
+                    </div>
+                    <div class="payment-option" data-method="usdt">
+                        <div class="payment-icon">₮</div>
+                        <div class="payment-name">Tether</div>
+                        <div class="payment-tag">USDT</div>
+                    </div>
+                    <div class="payment-option" data-method="paypal">
+                        <div class="payment-icon">💳</div>
+                        <div class="payment-name">PayPal</div>
+                        <div class="payment-tag">PayPal</div>
+                    </div>
+                    <div class="payment-option" data-method="bank">
+                        <div class="payment-icon">🏦</div>
+                        <div class="payment-name">Bank Transfer</div>
+                        <div class="payment-tag">Wire</div>
+                    </div>
+                    <div class="payment-option" data-method="upi">
+                        <div class="payment-icon">📱</div>
+                        <div class="payment-name">UPI</div>
+                        <div class="payment-tag">India</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Withdrawal Form -->
+            <form id="withdrawalForm" class="form-section">
+                <!-- Amount -->
+                <div class="form-group">
+                    <label class="form-label">Withdrawal Amount<span class="required">*</span></label>
+                    <input 
+                        type="number" 
+                        class="form-input" 
+                        id="withdrawAmount" 
+                        placeholder="Enter amount in INR"
+                        min="10"
+                        step="0.01"
+                        required
+                    >
+                </div>
+
+                <!-- Dynamic Payment Fields -->
+                <div id="paymentFields"></div>
+
+                <!-- Personal Information -->
+                <div class="form-group">
+                    <label class="form-label">Full Name<span class="required">*</span></label>
+                    <input 
+                        type="text" 
+                        class="form-input" 
+                        id="fullName" 
+                        placeholder="Enter your full name"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Email Address<span class="required">*</span></label>
+                    <input 
+                        type="email" 
+                        class="form-input" 
+                        id="email" 
+                        placeholder="Enter your email address"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Phone Number<span class="required">*</span></label>
+                    <input 
+                        type="tel" 
+                        class="form-input" 
+                        id="phone" 
+                        placeholder="Enter your phone number"
+                        required
+                    >
+                </div>
+
+                <!-- Info Box -->
+                <div class="info-box" id="infoBox">
+                    <strong>ℹ️ Select a payment method to continue</strong>
+                </div>
+
+                <!-- Warning Box -->
+                <div class="warning-box">
+                    <strong>⚠️ Warning:</strong>
+                    Please double-check all payment details. Transactions sent to incorrect addresses or accounts cannot be recovered and will result in permanent loss of funds.
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn" id="submitBtn" disabled>
+                    💸 Request Withdrawal
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- Success Modal -->
+    <div class="modal" id="successModal">
+        <div class="modal-content">
+            <div class="success-icon">✅</div>
+            <h2 class="success-title">Withdrawal Requested!</h2>
+            <p class="success-message">
+                Thank you! Your withdrawal request has been successfully submitted and is now being processed.
+            </p>
+
+            <div class="success-details">
+                <div class="detail-row">
+                    <span class="detail-label">Payment Method:</span>
+                    <span class="detail-value" id="modalMethod">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Amount:</span>
+                    <span class="detail-value highlight" id="modalAmount">₹0.00</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Payment Details:</span>
+                    <span class="detail-value" id="modalDetails" style="font-size: 0.8125rem;">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Request Time:</span>
+                    <span class="detail-value" id="modalTime">-</span>
+                </div>
+                <div class="detail-row">
+                    <span class="detail-label">Transaction ID:</span>
+                    <span class="detail-value" id="modalTxId">-</span>
+                </div>
+            </div>
+
+            <div class="time-info">
+                <strong>⏰ Processing Time:</strong>
+                Your withdrawal will be processed and sent within the next <strong id="modalProcessTime">12 hours</strong>. You will receive a confirmation email once the transaction is completed.
+            </div>
+
+            <button class="close-btn" onclick="closeModal()">
+                🎮 Back to Game
+            </button>
+        </div>
+    </div>
+
+    <script>
+    // Create Stars
+    function createStars() {
+        const starsContainer = document.getElementById('stars');
+        for (let i = 0; i < 200; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = Math.random() * 3 + 's';
+            star.style.animationDuration = (Math.random() * 2 + 2) + 's';
+            starsContainer.appendChild(star);
+        }
+    }
+    createStars();
+
+    // Get user balance from localStorage (synced with game page)
+    let userBalance = parseFloat(localStorage.getItem('avijet_balance')) || 0.00;
+    document.getElementById('userBalance').textContent = userBalance.toFixed(2);
+
+    // Firebase optional integration for global balance
+    let firebaseAvailable = false;
+    function startFirebaseBalanceListener() {
+        try {
+            const ref = firebase.database().ref('avijet/global_balance');
+            ref.on('value', snapshot => {
+                const v = parseFloat(snapshot.val());
+                if (!isNaN(v)) {
+                    userBalance = v;
+                    document.getElementById('userBalance').textContent = userBalance.toFixed(2);
+                    localStorage.setItem('avijet_balance', userBalance.toFixed(2));
+                }
+            });
+        } catch (e) { console.warn('Firebase listener error', e); }
+    }
+
+    function syncBalanceToFirebase(value) {
+        try { 
+            if (firebaseAvailable && window.firebase && firebase.database) {
+                firebase.database().ref('avijet/global_balance').set(value);
+            } 
+        } catch (e) { 
+            console.warn('Failed to sync balance to Firebase', e); 
+        }
+    }
+
+    (function initFirebaseIfConfigured(){
+        const cfg = window.AVIJET_FIREBASE_CONFIG || null;
+        if (!cfg) return;
+        const s1 = document.createElement('script'); 
+        s1.src = 'https://www.gstatic.com/firebasejs/9.22.1/firebase-app-compat.js'; 
+        document.head.appendChild(s1);
+        const s2 = document.createElement('script'); 
+        s2.src = 'https://www.gstatic.com/firebasejs/9.22.1/firebase-database-compat.js'; 
+        document.head.appendChild(s2);
+        s2.onload = () => { 
+            try { 
+                firebase.initializeApp(cfg); 
+                firebaseAvailable = true; 
+                startFirebaseBalanceListener(); 
+            } catch (e) { 
+                console.warn('Firebase init error', e); 
+            } 
+        };
+    })();
+
+    // Listen for external balance updates (other tabs/pages via localStorage)
+    window.addEventListener('storage', function(e) {
+        if (e.key === 'avijet_balance') {
+            const val = parseFloat(e.newValue);
+            if (!isNaN(val)) {
+                userBalance = val;
+                document.getElementById('userBalance').textContent = userBalance.toFixed(2);
+            }
+        }
+    });
+
+    // Payment method configurations
+    const paymentMethods = {
+        btc: {
+            name: 'Bitcoin (BTC)',
+            fields: [
+                { id: 'btcAddress', label: 'Bitcoin Wallet Address', type: 'text', placeholder: 'bc1q... or 1... or 3...', required: true, pattern: '^(bc1|[13])[a-zA-HJ-NP-Z0-9]{25,62}$' }
+            ],
+            info: '• Minimum withdrawal: $10<br>• Processing time: Up to 12 hours<br>• Network fee: Automatically deducted<br>• Blockchain: Bitcoin Network',
+            processTime: '12 hours'
+        },
+        eth: {
+            name: 'Ethereum (ETH)',
+            fields: [
+                { id: 'ethAddress', label: 'Ethereum Wallet Address', type: 'text', placeholder: '0x...', required: true, pattern: '^0x[a-fA-F0-9]{40}$' }
+            ],
+            info: '• Minimum withdrawal: $10<br>• Processing time: Up to 6 hours<br>• Network fee: Automatically deducted<br>• Blockchain: Ethereum Network',
+            processTime: '6 hours'
+        },
+        usdt: {
+            name: 'Tether (USDT)',
+            fields: [
+                { id: 'usdtAddress', label: 'USDT Wallet Address', type: 'text', placeholder: 'Enter USDT address', required: true },
+                { id: 'network', label: 'Network', type: 'select', options: ['TRC20 (Tron)', 'ERC20 (Ethereum)', 'BEP20 (BSC)'], required: true }
+            ],
+            info: '• Minimum withdrawal: $10<br>• Processing time: Up to 4 hours<br>• Network fee: Varies by network<br>• Recommended: TRC20 (lowest fees)',
+            processTime: '4 hours'
+        },
+        paypal: {
+            name: 'PayPal',
+            fields: [
+                { id: 'paypalEmail', label: 'PayPal Email Address', type: 'email', placeholder: 'your@email.com', required: true }
+            ],
+            info: '• Minimum withdrawal: $20<br>• Processing time: 1-3 business days<br>• Fee: 2.5% of withdrawal amount<br>• Account must be verified',
+            processTime: '1-3 business days'
+        },
+        bank: {
+            name: 'Bank Transfer',
+            fields: [
+                { id: 'accountName', label: 'Account Holder Name', type: 'text', placeholder: 'Full name as per bank', required: true },
+                { id: 'accountNumber', label: 'Account Number', type: 'text', placeholder: 'Bank account number', required: true },
+                { id: 'bankName', label: 'Bank Name', type: 'text', placeholder: 'Name of your bank', required: true },
+                { id: 'ifscCode', label: 'SWIFT/IFSC Code', type: 'text', placeholder: 'Bank routing code', required: true },
+                { id: 'bankBranch', label: 'Branch Name', type: 'text', placeholder: 'Bank branch location', required: false }
+            ],
+            info: '• Minimum withdrawal: $50<br>• Processing time: 3-5 business days<br>• Fee: $5 flat fee<br>• International transfers may take longer',
+            processTime: '3-5 business days'
+        },
+        upi: {
+            name: 'UPI (India)',
+            fields: [
+                { id: 'upiId', label: 'UPI ID', type: 'text', placeholder: 'yourname@upi', required: true, pattern: '^[a-zA-Z0-9.\\-_]{2,}@[a-zA-Z]{2,}$' },
+                { id: 'upiName', label: 'UPI Account Name', type: 'text', placeholder: 'Name linked to UPI', required: true }
+            ],
+            info: '• Minimum withdrawal: ₹100 ($1.20)<br>• Processing time: Instant to 2 hours<br>• Fee: No fee<br>• Available only in India',
+            processTime: 'Instant to 2 hours'
+        }
+    };
+
+    // Selected payment method
+    let selectedMethod = null;
+
+    // Payment method selection
+    document.querySelectorAll('.payment-option').forEach(option => {
+        option.addEventListener('click', function() {
+            document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+            this.classList.add('active');
+            selectedMethod = this.dataset.method;
+            renderPaymentFields(selectedMethod);
+            document.getElementById('submitBtn').disabled = false;
+        });
+    });
+
+    // Render payment-specific fields
+    function renderPaymentFields(method) {
+        const config = paymentMethods[method];
+        const container = document.getElementById('paymentFields');
+        
+        let html = '';
+        
+        config.fields.forEach(field => {
+            html += `<div class="form-group">`;
+            html += `<label class="form-label">${field.label} ${field.required ? '<span class="required">*</span>' : ''}</label>`;
+            
+            if (field.type === 'select') {
+                html += `<select class="form-select" id="${field.id}" ${field.required ? 'required' : ''}>`;
+                html += `<option value="">Select ${field.label}</option>`;
+                field.options.forEach(opt => {
+                    html += `<option value="${opt}">${opt}</option>`;
+                });
+                html += `</select>`;
+            } else {
+                const inputClass = (method === 'btc' || method === 'eth' || method === 'usdt') ? 'form-input crypto-address' : 'form-input';
+                html += `<input 
+                    type="${field.type}" 
+                    class="${inputClass}" 
+                    id="${field.id}" 
+                    placeholder="${field.placeholder}"
+                    ${field.required ? 'required' : ''}
+                    ${field.pattern ? `pattern="${field.pattern}"` : ''}
+                >`;
+            }
+            
+            html += `</div>`;
+        });
+        
+        container.innerHTML = html;
+        document.getElementById('infoBox').innerHTML = `<strong>ℹ️ ${config.name} Information:</strong><br>${config.info}`;
+    }
+
+    // Generate Transaction ID
+    function generateTxId() {
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let txId = 'WD-';
+        for (let i = 0; i < 12; i++) {
+            txId += chars.charAt(Math.floor(Math.random() * chars.length));
+        }
+        return txId;
+    }
+
+    // Get Current Time
+    function getCurrentTime() {
+        const now = new Date();
+        const options = {
+            year: 'numeric',
+            month: 'short',
+            day: 'numeric',
+            hour: '2-digit',
+            minute: '2-digit',
+            second: '2-digit',
+            hour12: true
+        };
+        return now.toLocaleString('en-US', options);
+    }
+
+    // Form Submission
+    document.getElementById('withdrawalForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+
+        if (!selectedMethod) {
+            alert('⚠️ Please select a payment method!');
+            return;
+        }
+
+        const amount = parseFloat(document.getElementById('withdrawAmount').value);
+        const fullName = document.getElementById('fullName').value;
+        const email = document.getElementById('email').value;
+        const phone = document.getElementById('phone').value;
+
+        // Validation
+        if (amount <= 0 || isNaN(amount)) {
+            alert('⚠️ Please enter a valid withdrawal amount!');
+            return;
+        }
+
+        const minAmount = selectedMethod === 'bank' ? 50 : (selectedMethod === 'paypal' ? 20 : 10);
+        if (amount < minAmount) {
+            alert(`⚠️ Minimum withdrawal amount for ${paymentMethods[selectedMethod].name} is $${minAmount}`);
+            return;
+        }
+
+        if (amount > userBalance) {
+            alert('⚠️ Insufficient balance! Your current balance is ₹' + userBalance.toFixed(2));
+            return;
+        }
+
+        // Get payment details
+        const config = paymentMethods[selectedMethod];
+        let paymentDetails = '';
+        
+        config.fields.forEach(field => {
+            const value = document.getElementById(field.id).value;
+            if (value) {
+                paymentDetails += `${field.label}: ${value}\n`;
+            }
+        });
+
+        // Update balance
+        userBalance -= amount;
+        localStorage.setItem('avijet_balance', userBalance.toFixed(2));
+        syncBalanceToFirebase(parseFloat(userBalance.toFixed(2)));
+
+        // Generate transaction details
+        const txId = generateTxId();
+        const currentTime = getCurrentTime();
+
+        // Update modal
+        document.getElementById('modalMethod').textContent = config.name;
+        document.getElementById('modalAmount').textContent = '$' + amount.toFixed(2);
+        document.getElementById('modalDetails').textContent = document.getElementById(config.fields[0].id).value;
+        document.getElementById('modalTime').textContent = currentTime;
+        document.getElementById('modalTxId').textContent = txId;
+        document.getElementById('modalProcessTime').textContent = config.processTime;
+
+        // Show success modal
+        document.getElementById('successModal').classList.add('show');
+
+        // Save withdrawal to localStorage (for history)
+        const withdrawals = JSON.parse(localStorage.getItem('withdrawals')) || [];
+        withdrawals.push({
+            txId: txId,
+            method: config.name,
+            amount: amount,
+            paymentDetails: paymentDetails,
+            fullName: fullName,
+            email: email,
+            phone: phone,
+            time: currentTime,
+            status: 'Processing'
+        });
+        localStorage.setItem('withdrawals', JSON.stringify(withdrawals));
+
+        // Reset form
+        document.getElementById('withdrawalForm').reset();
+        document.getElementById('paymentFields').innerHTML = '';
+        document.querySelectorAll('.payment-option').forEach(opt => opt.classList.remove('active'));
+        selectedMethod = null;
+        document.getElementById('submitBtn').disabled = true;
+        document.getElementById('infoBox').innerHTML = '<strong>ℹ️ Select a payment method to continue</strong>';
+    });
+
+    // Close Modal
+    function closeModal() {
+        document.getElementById('successModal').classList.remove('show');
+        document.getElementById('userBalance').textContent = userBalance.toFixed(2);
+    }
+
+    // Prevent modal close on outside click
+    document.getElementById('successModal').addEventListener('click', function(e) {
+        if (e.target === this) {
+            // Optional: allow closing by clicking outside
+            // closeModal();
+        }
+    });
+</script>
+</body>
+</html>
